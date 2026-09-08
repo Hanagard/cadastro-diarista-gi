@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./App.css";
 
 const PRIVATE_RECEIVER_URL =
-  "https://script.google.com/macros/s/AKfycbwuX8vH473HwnUE0B9-06xrlMqplUeIghNCmpzmI3ouGH40Qh144owazcUcFbAkBh_g8w/exec";
+  "https://script.google.com/macros/s/AKfycbwGN2kbV2tHIWzkLfkNgXarWEGMu61Mg6niez4FwZXbWlOmOeqaB8cOHUR8Vebqgm93-w/exec";
 
 const emptyForm = {
   funcao: "",
