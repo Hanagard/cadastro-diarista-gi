@@ -2,7 +2,8 @@
 import React, { useState } from "react";
 import "./App.css";
 
-const PRIVATE_RECEIVER_URL = "https://script.google.com/macros/s/AKfycbw_DMNa9nHm1_fP2vUjkKre7O24i8emH2y1jKTIUidIHFDUx9J9CqilAyZg7vE1l8STVA/exec";
+const PRIVATE_RECEIVER_URL =
+  "https://script.google.com/macros/s/AKfycbw_DMNa9nHm1_fP2vUjkKre7O24i8emH2y1jKTIUidIHFDUx9J9CqilAyZg7vE1l8STVA/exec";
 
 const emptyForm = {
   funcao: "",
@@ -32,7 +33,12 @@ export default function App() {
 
   function handleChange(event) {
     const { name, value } = event.target;
-    setForm((prev) => ({ ...prev, [name]: value }));
+
+    setForm((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+
     setMessage("");
   }
 
@@ -50,6 +56,7 @@ export default function App() {
       "agencia",
       "conta",
       "pix",
+      "observacoes"
     ];
 
     const missing = requiredFields.some((field) => !form[field]);
@@ -73,10 +80,13 @@ export default function App() {
 
     setSending(false);
     setRecord(newRecord);
-    setForm(emptyForm);
+    setForm({ ...emptyForm });
     setMessage(result.message);
 
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
   }
 
   function printReceipt() {
@@ -88,10 +98,15 @@ export default function App() {
       <div className="container">
         {!record && (
           <header className="hero no-print">
-            <div className="eyebrow">🏢 Gi Group • Belém Filial 254 • HORECA</div>
+            <div className="eyebrow">
+              🏢 Gi Group • Belém Filial 254 • HORECA
+            </div>
+
             <h1>Cadastro de Diarista</h1>
+
             <p>
-              Preencha seus dados com atenção. Você verá apenas o seu comprovante após o envio.
+              Preencha seus dados com atenção. Você verá apenas o seu
+              comprovante após o envio.
             </p>
 
             {message && <div className="notice">{message}</div>}
@@ -101,18 +116,27 @@ export default function App() {
         {record && (
           <section className="success no-print">
             <h2>✅ Cadastro recebido</h2>
+
             <p>
               Seu cadastro foi enviado. Baixe ou salve seu comprovante em PDF.
             </p>
 
             <div className="button-row">
-              <button className="btn primary" onClick={printReceipt}>
+              <button
+                className="btn primary"
+                onClick={printReceipt}
+                type="button"
+              >
                 🖨️ Baixar comprovante em PDF
               </button>
 
               <button
                 className="btn secondary"
-                onClick={() => setRecord(null)}
+                onClick={() => {
+                  setRecord(null);
+                  setMessage("");
+                }}
+                type="button"
               >
                 Fazer novo cadastro
               </button>
@@ -304,14 +328,15 @@ export default function App() {
                       value={form.observacoes}
                       onChange={handleChange}
                       placeholder="Digite aqui alguma observação adicional..."
-                      rows="5"
+                      rows={5}
                     />
                   </label>
                 </fieldset>
 
                 <div className="warning">
-                  <strong>Importante:</strong> preencha corretamente seus dados.
-                  Qualquer número errado pode impedir o cadastro no sistema da Gi Group.
+                  <strong>Importante:</strong> preencha corretamente seus
+                  dados. Qualquer número errado pode impedir o cadastro no
+                  sistema da Gi Group.
                 </div>
 
                 <button
@@ -354,7 +379,9 @@ async function sendToPrivateBase(record) {
     await fetch(PRIVATE_RECEIVER_URL, {
       method: "POST",
       mode: "no-cors",
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        "Content-Type": "application/json",
+      },
       body: JSON.stringify(record),
     });
 
@@ -413,15 +440,9 @@ function Receipt({ record }) {
 
       <ReceiptGroup title="Dados bancários">
         <ReceiptItem label="Banco" value={record.banco} />
-        <ReceiptItem
-          label="Tipo de conta"
-          value={record.tipoConta}
-        />
+        <ReceiptItem label="Tipo de conta" value={record.tipoConta} />
         <ReceiptItem label="Agência" value={record.agencia} />
-        <ReceiptItem
-          label="Número da conta"
-          value={record.conta}
-        />
+        <ReceiptItem label="Número da conta" value={record.conta} />
         <ReceiptItem label="PIX" value={record.pix} />
       </ReceiptGroup>
 
@@ -457,6 +478,7 @@ function ReceiptItem({ label, value }) {
   return (
     <div className="receipt-item">
       <span>{label}</span>
+
       <strong>{value || "Não informado"}</strong>
     </div>
   );
