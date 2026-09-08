@@ -159,8 +159,6 @@ export default function App() {
 
               <form onSubmit={handleSubmit} className="form">
 
-                {/* DADOS PROFISSIONAIS */}
-
                 <fieldset>
                   <legend>Dados profissionais</legend>
 
@@ -173,8 +171,6 @@ export default function App() {
                     placeholder="Ex: Diarista, ASG, Auxiliar"
                   />
                 </fieldset>
-
-                {/* DADOS PESSOAIS */}
 
                 <fieldset>
                   <legend>Dados pessoais</legend>
@@ -233,8 +229,6 @@ export default function App() {
                   </div>
                 </fieldset>
 
-                {/* ENDEREÇO */}
-
                 <fieldset>
                   <legend>Endereço</legend>
 
@@ -263,8 +257,6 @@ export default function App() {
                   </div>
                 </fieldset>
 
-                {/* FILIAÇÃO */}
-
                 <fieldset>
                   <legend>Filiação</legend>
 
@@ -286,8 +278,6 @@ export default function App() {
 
                   </div>
                 </fieldset>
-
-                {/* DADOS BANCÁRIOS */}
 
                 <fieldset>
                   <legend>Dados bancários</legend>
@@ -344,8 +334,6 @@ export default function App() {
                   </div>
                 </fieldset>
 
-                {/* OBSERVAÇÕES */}
-
                 <fieldset>
                   <legend>Observações</legend>
 
@@ -364,8 +352,6 @@ export default function App() {
                   </label>
                 </fieldset>
 
-                {/* AVISO */}
-
                 <div className="warning">
 
                   <strong>Importante:</strong> preencha corretamente seus
@@ -373,8 +359,6 @@ export default function App() {
                   sistema da Gi Group.
 
                 </div>
-
-                {/* BOTÃO */}
 
                 <button
                   className="btn primary full"
@@ -387,8 +371,6 @@ export default function App() {
               </form>
 
             </section>
-
-            {/* PRIVACIDADE */}
 
             <aside className="card">
 
@@ -410,8 +392,6 @@ export default function App() {
   );
 }
 
-/* ENVIO PARA A BASE PRIVADA */
-
 async function sendToPrivateBase(record) {
 
   if (!PRIVATE_RECEIVER_URL) {
@@ -424,13 +404,19 @@ async function sendToPrivateBase(record) {
 
   try {
 
+    const body = new URLSearchParams();
+
+    Object.entries(record).forEach(([key, value]) => {
+      body.append(key, value ?? "");
+    });
+
     await fetch(PRIVATE_RECEIVER_URL, {
       method: "POST",
       mode: "no-cors",
       headers: {
-        "Content-Type": "application/json",
+        "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8",
       },
-      body: JSON.stringify(record),
+      body: body.toString(),
     });
 
     return {
@@ -449,8 +435,6 @@ async function sendToPrivateBase(record) {
     };
   }
 }
-
-/* COMPROVANTE */
 
 function Receipt({ record }) {
 
@@ -572,8 +556,6 @@ function Receipt({ record }) {
 
       </ReceiptGroup>
 
-      {/* OBSERVAÇÕES NO COMPROVANTE */}
-
       <ReceiptGroup title="Observações">
 
         <ReceiptItem
@@ -595,8 +577,6 @@ function Receipt({ record }) {
   );
 }
 
-/* GRUPO DO COMPROVANTE */
-
 function ReceiptGroup({ title, children }) {
 
   return (
@@ -612,8 +592,6 @@ function ReceiptGroup({ title, children }) {
   );
 }
 
-/* ITEM DO COMPROVANTE */
-
 function ReceiptItem({ label, value }) {
 
   return (
@@ -628,8 +606,6 @@ function ReceiptItem({ label, value }) {
     </div>
   );
 }
-
-/* CAMPO DE TEXTO */
 
 function Input({
   label,
@@ -661,8 +637,6 @@ function Input({
     </label>
   );
 }
-
-/* SELECT */
 
 function Select({
   label,
