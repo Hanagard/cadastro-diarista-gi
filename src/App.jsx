@@ -20,6 +20,7 @@ const emptyForm = {
   agencia: "",
   conta: "",
   pix: "",
+  observações"",
 };
 
 export default function App() {
