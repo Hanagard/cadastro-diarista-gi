@@ -1,4 +1,3 @@
-```jsx
 import React, { useState } from "react";
 import "./App.css";
 
@@ -56,7 +55,6 @@ export default function App() {
       "agencia",
       "conta",
       "pix",
-      "observacoes"
     ];
 
     const missing = requiredFields.some((field) => !form[field]);
@@ -96,6 +94,7 @@ export default function App() {
   return (
     <div className="app">
       <div className="container">
+
         {!record && (
           <header className="hero no-print">
             <div className="eyebrow">
@@ -122,6 +121,7 @@ export default function App() {
             </p>
 
             <div className="button-row">
+
               <button
                 className="btn primary"
                 onClick={printReceipt}
@@ -140,6 +140,7 @@ export default function App() {
               >
                 Fazer novo cadastro
               </button>
+
             </div>
 
             {message && <div className="notice">{message}</div>}
@@ -149,11 +150,17 @@ export default function App() {
         {record ? (
           <Receipt record={record} />
         ) : (
+
           <main className="layout no-print">
+
             <section className="card">
+
               <h2>📝 Formulário de cadastro</h2>
 
               <form onSubmit={handleSubmit} className="form">
+
+                {/* DADOS PROFISSIONAIS */}
+
                 <fieldset>
                   <legend>Dados profissionais</legend>
 
@@ -167,10 +174,13 @@ export default function App() {
                   />
                 </fieldset>
 
+                {/* DADOS PESSOAIS */}
+
                 <fieldset>
                   <legend>Dados pessoais</legend>
 
                   <div className="grid two">
+
                     <Input
                       required
                       label="Nome completo"
@@ -219,14 +229,19 @@ export default function App() {
                       onChange={handleChange}
                       placeholder="(91) 99999-9999"
                     />
+
                   </div>
                 </fieldset>
+
+                {/* ENDEREÇO */}
 
                 <fieldset>
                   <legend>Endereço</legend>
 
                   <div className="grid three">
+
                     <div className="span-two">
+
                       <Input
                         label="Endereço completo"
                         name="endereco"
@@ -234,6 +249,7 @@ export default function App() {
                         onChange={handleChange}
                         placeholder="Rua, número, bairro e cidade"
                       />
+
                     </div>
 
                     <Input
@@ -243,13 +259,17 @@ export default function App() {
                       onChange={handleChange}
                       placeholder="00000-000"
                     />
+
                   </div>
                 </fieldset>
+
+                {/* FILIAÇÃO */}
 
                 <fieldset>
                   <legend>Filiação</legend>
 
                   <div className="grid two">
+
                     <Input
                       label="Nome da mãe"
                       name="nomeMae"
@@ -263,13 +283,17 @@ export default function App() {
                       value={form.nomePai}
                       onChange={handleChange}
                     />
+
                   </div>
                 </fieldset>
+
+                {/* DADOS BANCÁRIOS */}
 
                 <fieldset>
                   <legend>Dados bancários</legend>
 
                   <div className="grid two">
+
                     <Input
                       required
                       label="Banco"
@@ -305,6 +329,7 @@ export default function App() {
                     />
 
                     <div className="span-two">
+
                       <Input
                         required
                         label="PIX"
@@ -313,14 +338,19 @@ export default function App() {
                         onChange={handleChange}
                         placeholder="CPF, telefone, e-mail ou chave aleatória"
                       />
+
                     </div>
+
                   </div>
                 </fieldset>
+
+                {/* OBSERVAÇÕES */}
 
                 <fieldset>
                   <legend>Observações</legend>
 
                   <label className="field">
+
                     <span>Observações</span>
 
                     <textarea
@@ -330,14 +360,21 @@ export default function App() {
                       placeholder="Digite aqui alguma observação adicional..."
                       rows={5}
                     />
+
                   </label>
                 </fieldset>
 
+                {/* AVISO */}
+
                 <div className="warning">
+
                   <strong>Importante:</strong> preencha corretamente seus
                   dados. Qualquer número errado pode impedir o cadastro no
                   sistema da Gi Group.
+
                 </div>
+
+                {/* BOTÃO */}
 
                 <button
                   className="btn primary full"
@@ -346,10 +383,15 @@ export default function App() {
                 >
                   {sending ? "Enviando..." : "Enviar cadastro"}
                 </button>
+
               </form>
+
             </section>
 
+            {/* PRIVACIDADE */}
+
             <aside className="card">
+
               <h2>🔒 Privacidade</h2>
 
               <ul>
@@ -358,7 +400,9 @@ export default function App() {
                 <li>Confira CPF, telefone, agência, conta e PIX.</li>
                 <li>Guarde o PDF do comprovante.</li>
               </ul>
+
             </aside>
+
           </main>
         )}
       </div>
@@ -366,7 +410,10 @@ export default function App() {
   );
 }
 
+/* ENVIO PARA A BASE PRIVADA */
+
 async function sendToPrivateBase(record) {
+
   if (!PRIVATE_RECEIVER_URL) {
     return {
       ok: true,
@@ -376,6 +423,7 @@ async function sendToPrivateBase(record) {
   }
 
   try {
+
     await fetch(PRIVATE_RECEIVER_URL, {
       method: "POST",
       mode: "no-cors",
@@ -389,7 +437,9 @@ async function sendToPrivateBase(record) {
       ok: true,
       message: "Cadastro enviado com sucesso para a base privada.",
     };
+
   } catch (error) {
+
     console.error(error);
 
     return {
@@ -400,10 +450,15 @@ async function sendToPrivateBase(record) {
   }
 }
 
+/* COMPROVANTE */
+
 function Receipt({ record }) {
+
   return (
     <section className="receipt">
+
       <div className="receipt-header">
+
         <div className="eyebrow">
           🏢 Gi Group • Belém Filial 254 • HORECA
         </div>
@@ -411,78 +466,170 @@ function Receipt({ record }) {
         <h1>Comprovante de Cadastro de Diarista</h1>
 
         <p>Protocolo: {record.protocolo}</p>
+
         <p>Data do cadastro: {record.dataCadastro}</p>
+
       </div>
 
       <ReceiptGroup title="Dados profissionais">
-        <ReceiptItem label="Função" value={record.funcao} />
-        <ReceiptItem label="Status" value={record.status} />
+
+        <ReceiptItem
+          label="Função"
+          value={record.funcao}
+        />
+
+        <ReceiptItem
+          label="Status"
+          value={record.status}
+        />
+
       </ReceiptGroup>
 
       <ReceiptGroup title="Dados pessoais">
-        <ReceiptItem label="Nome completo" value={record.nome} />
+
+        <ReceiptItem
+          label="Nome completo"
+          value={record.nome}
+        />
+
         <ReceiptItem
           label="Data de nascimento"
           value={record.nascimento}
         />
-        <ReceiptItem label="CPF" value={record.cpf} />
-        <ReceiptItem label="RG" value={record.rg} />
-        <ReceiptItem label="PIS / NIS / NIT" value={record.pis} />
-        <ReceiptItem label="Telefone" value={record.telefone} />
+
+        <ReceiptItem
+          label="CPF"
+          value={record.cpf}
+        />
+
+        <ReceiptItem
+          label="RG"
+          value={record.rg}
+        />
+
+        <ReceiptItem
+          label="PIS / NIS / NIT"
+          value={record.pis}
+        />
+
+        <ReceiptItem
+          label="Telefone"
+          value={record.telefone}
+        />
+
       </ReceiptGroup>
 
       <ReceiptGroup title="Endereço e filiação">
-        <ReceiptItem label="Endereço" value={record.endereco} />
-        <ReceiptItem label="CEP" value={record.cep} />
-        <ReceiptItem label="Nome da mãe" value={record.nomeMae} />
-        <ReceiptItem label="Nome do pai" value={record.nomePai} />
+
+        <ReceiptItem
+          label="Endereço"
+          value={record.endereco}
+        />
+
+        <ReceiptItem
+          label="CEP"
+          value={record.cep}
+        />
+
+        <ReceiptItem
+          label="Nome da mãe"
+          value={record.nomeMae}
+        />
+
+        <ReceiptItem
+          label="Nome do pai"
+          value={record.nomePai}
+        />
+
       </ReceiptGroup>
 
       <ReceiptGroup title="Dados bancários">
-        <ReceiptItem label="Banco" value={record.banco} />
-        <ReceiptItem label="Tipo de conta" value={record.tipoConta} />
-        <ReceiptItem label="Agência" value={record.agencia} />
-        <ReceiptItem label="Número da conta" value={record.conta} />
-        <ReceiptItem label="PIX" value={record.pix} />
+
+        <ReceiptItem
+          label="Banco"
+          value={record.banco}
+        />
+
+        <ReceiptItem
+          label="Tipo de conta"
+          value={record.tipoConta}
+        />
+
+        <ReceiptItem
+          label="Agência"
+          value={record.agencia}
+        />
+
+        <ReceiptItem
+          label="Número da conta"
+          value={record.conta}
+        />
+
+        <ReceiptItem
+          label="PIX"
+          value={record.pix}
+        />
+
       </ReceiptGroup>
 
+      {/* OBSERVAÇÕES NO COMPROVANTE */}
+
       <ReceiptGroup title="Observações">
+
         <ReceiptItem
           label="Observações"
           value={record.observacoes}
         />
+
       </ReceiptGroup>
 
       <div className="receipt-note">
+
         Este comprovante confirma o envio das informações preenchidas pelo
         candidato. A conferência e validação dos dados será realizada
         posteriormente.
+
       </div>
+
     </section>
   );
 }
 
+/* GRUPO DO COMPROVANTE */
+
 function ReceiptGroup({ title, children }) {
+
   return (
     <div className="receipt-group">
+
       <h2>{title}</h2>
 
       <div className="receipt-grid">
         {children}
       </div>
+
     </div>
   );
 }
+
+/* ITEM DO COMPROVANTE */
 
 function ReceiptItem({ label, value }) {
+
   return (
     <div className="receipt-item">
+
       <span>{label}</span>
 
-      <strong>{value || "Não informado"}</strong>
+      <strong>
+        {value || "Não informado"}
+      </strong>
+
     </div>
   );
 }
+
+/* CAMPO DE TEXTO */
 
 function Input({
   label,
@@ -493,8 +640,10 @@ function Input({
   type = "text",
   required = false,
 }) {
+
   return (
     <label className="field">
+
       <span>
         {label}
         {required ? " *" : ""}
@@ -508,9 +657,12 @@ function Input({
         onChange={onChange}
         placeholder={placeholder}
       />
+
     </label>
   );
 }
+
+/* SELECT */
 
 function Select({
   label,
@@ -520,8 +672,10 @@ function Select({
   options,
   required = false,
 }) {
+
   return (
     <label className="field">
+
       <span>
         {label}
         {required ? " *" : ""}
@@ -533,13 +687,18 @@ function Select({
         value={value}
         onChange={onChange}
       >
+
         {options.map((option) => (
-          <option key={option} value={option}>
+          <option
+            key={option}
+            value={option}
+          >
             {option}
           </option>
         ))}
+
       </select>
+
     </label>
   );
 }
-```
