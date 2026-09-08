@@ -1,3 +1,4 @@
+```jsx
 import React, { useState } from "react";
 import "./App.css";
 
@@ -20,7 +21,7 @@ const emptyForm = {
   agencia: "",
   conta: "",
   pix: "",
-  observações"",
+  observacoes: "",
 };
 
 export default function App() {
@@ -103,14 +104,20 @@ export default function App() {
             <p>
               Seu cadastro foi enviado. Baixe ou salve seu comprovante em PDF.
             </p>
+
             <div className="button-row">
               <button className="btn primary" onClick={printReceipt}>
                 🖨️ Baixar comprovante em PDF
               </button>
-              <button className="btn secondary" onClick={() => setRecord(null)}>
+
+              <button
+                className="btn secondary"
+                onClick={() => setRecord(null)}
+              >
                 Fazer novo cadastro
               </button>
             </div>
+
             {message && <div className="notice">{message}</div>}
           </section>
         )}
@@ -125,57 +132,193 @@ export default function App() {
               <form onSubmit={handleSubmit} className="form">
                 <fieldset>
                   <legend>Dados profissionais</legend>
-                  <Input required label="Função" name="funcao" value={form.funcao} onChange={handleChange} placeholder="Ex: Diarista, ASG, Auxiliar" />
+
+                  <Input
+                    required
+                    label="Função"
+                    name="funcao"
+                    value={form.funcao}
+                    onChange={handleChange}
+                    placeholder="Ex: Diarista, ASG, Auxiliar"
+                  />
                 </fieldset>
 
                 <fieldset>
                   <legend>Dados pessoais</legend>
+
                   <div className="grid two">
-                    <Input required label="Nome completo" name="nome" value={form.nome} onChange={handleChange} />
-                    <Input required type="date" label="Data de nascimento" name="nascimento" value={form.nascimento} onChange={handleChange} />
-                    <Input required label="CPF" name="cpf" value={form.cpf} onChange={handleChange} placeholder="000.000.000-00" />
-                    <Input label="RG" name="rg" value={form.rg} onChange={handleChange} />
-                    <Input label="PIS / NIS / NIT" name="pis" value={form.pis} onChange={handleChange} />
-                    <Input required label="Contato / Telefone" name="telefone" value={form.telefone} onChange={handleChange} placeholder="(91) 99999-9999" />
+                    <Input
+                      required
+                      label="Nome completo"
+                      name="nome"
+                      value={form.nome}
+                      onChange={handleChange}
+                    />
+
+                    <Input
+                      required
+                      type="date"
+                      label="Data de nascimento"
+                      name="nascimento"
+                      value={form.nascimento}
+                      onChange={handleChange}
+                    />
+
+                    <Input
+                      required
+                      label="CPF"
+                      name="cpf"
+                      value={form.cpf}
+                      onChange={handleChange}
+                      placeholder="000.000.000-00"
+                    />
+
+                    <Input
+                      label="RG"
+                      name="rg"
+                      value={form.rg}
+                      onChange={handleChange}
+                    />
+
+                    <Input
+                      label="PIS / NIS / NIT"
+                      name="pis"
+                      value={form.pis}
+                      onChange={handleChange}
+                    />
+
+                    <Input
+                      required
+                      label="Contato / Telefone"
+                      name="telefone"
+                      value={form.telefone}
+                      onChange={handleChange}
+                      placeholder="(91) 99999-9999"
+                    />
                   </div>
                 </fieldset>
 
                 <fieldset>
                   <legend>Endereço</legend>
+
                   <div className="grid three">
                     <div className="span-two">
-                      <Input label="Endereço completo" name="endereco" value={form.endereco} onChange={handleChange} placeholder="Rua, número, bairro e cidade" />
+                      <Input
+                        label="Endereço completo"
+                        name="endereco"
+                        value={form.endereco}
+                        onChange={handleChange}
+                        placeholder="Rua, número, bairro e cidade"
+                      />
                     </div>
-                    <Input label="CEP" name="cep" value={form.cep} onChange={handleChange} placeholder="00000-000" />
+
+                    <Input
+                      label="CEP"
+                      name="cep"
+                      value={form.cep}
+                      onChange={handleChange}
+                      placeholder="00000-000"
+                    />
                   </div>
                 </fieldset>
 
                 <fieldset>
                   <legend>Filiação</legend>
+
                   <div className="grid two">
-                    <Input label="Nome da mãe" name="nomeMae" value={form.nomeMae} onChange={handleChange} />
-                    <Input label="Nome do pai" name="nomePai" value={form.nomePai} onChange={handleChange} />
+                    <Input
+                      label="Nome da mãe"
+                      name="nomeMae"
+                      value={form.nomeMae}
+                      onChange={handleChange}
+                    />
+
+                    <Input
+                      label="Nome do pai"
+                      name="nomePai"
+                      value={form.nomePai}
+                      onChange={handleChange}
+                    />
                   </div>
                 </fieldset>
 
                 <fieldset>
                   <legend>Dados bancários</legend>
+
                   <div className="grid two">
-                    <Input required label="Banco" name="banco" value={form.banco} onChange={handleChange} placeholder="Ex: Nubank, Caixa, Bradesco" />
-                    <Select required label="Tipo de conta" name="tipoConta" value={form.tipoConta} onChange={handleChange} options={["Corrente", "Poupança"]} />
-                    <Input required label="Agência" name="agencia" value={form.agencia} onChange={handleChange} />
-                    <Input required label="Número da conta" name="conta" value={form.conta} onChange={handleChange} />
+                    <Input
+                      required
+                      label="Banco"
+                      name="banco"
+                      value={form.banco}
+                      onChange={handleChange}
+                      placeholder="Ex: Nubank, Caixa, Bradesco"
+                    />
+
+                    <Select
+                      required
+                      label="Tipo de conta"
+                      name="tipoConta"
+                      value={form.tipoConta}
+                      onChange={handleChange}
+                      options={["Corrente", "Poupança"]}
+                    />
+
+                    <Input
+                      required
+                      label="Agência"
+                      name="agencia"
+                      value={form.agencia}
+                      onChange={handleChange}
+                    />
+
+                    <Input
+                      required
+                      label="Número da conta"
+                      name="conta"
+                      value={form.conta}
+                      onChange={handleChange}
+                    />
+
                     <div className="span-two">
-                      <Input required label="PIX" name="pix" value={form.pix} onChange={handleChange} placeholder="CPF, telefone, e-mail ou chave aleatória" />
+                      <Input
+                        required
+                        label="PIX"
+                        name="pix"
+                        value={form.pix}
+                        onChange={handleChange}
+                        placeholder="CPF, telefone, e-mail ou chave aleatória"
+                      />
                     </div>
                   </div>
                 </fieldset>
 
+                <fieldset>
+                  <legend>Observações</legend>
+
+                  <label className="field">
+                    <span>Observações</span>
+
+                    <textarea
+                      name="observacoes"
+                      value={form.observacoes}
+                      onChange={handleChange}
+                      placeholder="Digite aqui alguma observação adicional..."
+                      rows="5"
+                    />
+                  </label>
+                </fieldset>
+
                 <div className="warning">
-                  <strong>Importante:</strong> preencha corretamente seus dados. Qualquer número errado pode impedir o cadastro no sistema da Gi Group.
+                  <strong>Importante:</strong> preencha corretamente seus dados.
+                  Qualquer número errado pode impedir o cadastro no sistema da Gi Group.
                 </div>
 
-                <button className="btn primary full" type="submit" disabled={sending}>
+                <button
+                  className="btn primary full"
+                  type="submit"
+                  disabled={sending}
+                >
                   {sending ? "Enviando..." : "Enviar cadastro"}
                 </button>
               </form>
@@ -183,6 +326,7 @@ export default function App() {
 
             <aside className="card">
               <h2>🔒 Privacidade</h2>
+
               <ul>
                 <li>Você não verá dados de outras pessoas.</li>
                 <li>Após enviar, aparecerá apenas seu comprovante.</li>
@@ -201,7 +345,8 @@ async function sendToPrivateBase(record) {
   if (!PRIVATE_RECEIVER_URL) {
     return {
       ok: true,
-      message: "Cadastro gerado. Falta conectar o link da sua base privada no código.",
+      message:
+        "Cadastro gerado. Falta conectar o link da sua base privada no código.",
     };
   }
 
@@ -219,9 +364,11 @@ async function sendToPrivateBase(record) {
     };
   } catch (error) {
     console.error(error);
+
     return {
       ok: false,
-      message: "Não foi possível enviar para a base privada. Salve o comprovante e avise o responsável.",
+      message:
+        "Não foi possível enviar para a base privada. Salve o comprovante e avise o responsável.",
     };
   }
 }
@@ -230,8 +377,12 @@ function Receipt({ record }) {
   return (
     <section className="receipt">
       <div className="receipt-header">
-        <div className="eyebrow">🏢 Gi Group • Belém Filial 254 • HORECA</div>
+        <div className="eyebrow">
+          🏢 Gi Group • Belém Filial 254 • HORECA
+        </div>
+
         <h1>Comprovante de Cadastro de Diarista</h1>
+
         <p>Protocolo: {record.protocolo}</p>
         <p>Data do cadastro: {record.dataCadastro}</p>
       </div>
@@ -243,7 +394,10 @@ function Receipt({ record }) {
 
       <ReceiptGroup title="Dados pessoais">
         <ReceiptItem label="Nome completo" value={record.nome} />
-        <ReceiptItem label="Data de nascimento" value={record.nascimento} />
+        <ReceiptItem
+          label="Data de nascimento"
+          value={record.nascimento}
+        />
         <ReceiptItem label="CPF" value={record.cpf} />
         <ReceiptItem label="RG" value={record.rg} />
         <ReceiptItem label="PIS / NIS / NIT" value={record.pis} />
@@ -259,14 +413,29 @@ function Receipt({ record }) {
 
       <ReceiptGroup title="Dados bancários">
         <ReceiptItem label="Banco" value={record.banco} />
-        <ReceiptItem label="Tipo de conta" value={record.tipoConta} />
+        <ReceiptItem
+          label="Tipo de conta"
+          value={record.tipoConta}
+        />
         <ReceiptItem label="Agência" value={record.agencia} />
-        <ReceiptItem label="Número da conta" value={record.conta} />
+        <ReceiptItem
+          label="Número da conta"
+          value={record.conta}
+        />
         <ReceiptItem label="PIX" value={record.pix} />
       </ReceiptGroup>
 
+      <ReceiptGroup title="Observações">
+        <ReceiptItem
+          label="Observações"
+          value={record.observacoes}
+        />
+      </ReceiptGroup>
+
       <div className="receipt-note">
-        Este comprovante confirma o envio das informações preenchidas pelo candidato. A conferência e validação dos dados será realizada posteriormente.
+        Este comprovante confirma o envio das informações preenchidas pelo
+        candidato. A conferência e validação dos dados será realizada
+        posteriormente.
       </div>
     </section>
   );
@@ -276,7 +445,10 @@ function ReceiptGroup({ title, children }) {
   return (
     <div className="receipt-group">
       <h2>{title}</h2>
-      <div className="receipt-grid">{children}</div>
+
+      <div className="receipt-grid">
+        {children}
+      </div>
     </div>
   );
 }
@@ -290,24 +462,62 @@ function ReceiptItem({ label, value }) {
   );
 }
 
-function Input({ label, name, value, onChange, placeholder, type = "text", required = false }) {
+function Input({
+  label,
+  name,
+  value,
+  onChange,
+  placeholder,
+  type = "text",
+  required = false,
+}) {
   return (
     <label className="field">
-      <span>{label}{required ? " *" : ""}</span>
-      <input required={required} type={type} name={name} value={value} onChange={onChange} placeholder={placeholder} />
+      <span>
+        {label}
+        {required ? " *" : ""}
+      </span>
+
+      <input
+        required={required}
+        type={type}
+        name={name}
+        value={value}
+        onChange={onChange}
+        placeholder={placeholder}
+      />
     </label>
   );
 }
 
-function Select({ label, name, value, onChange, options, required = false }) {
+function Select({
+  label,
+  name,
+  value,
+  onChange,
+  options,
+  required = false,
+}) {
   return (
     <label className="field">
-      <span>{label}{required ? " *" : ""}</span>
-      <select required={required} name={name} value={value} onChange={onChange}>
+      <span>
+        {label}
+        {required ? " *" : ""}
+      </span>
+
+      <select
+        required={required}
+        name={name}
+        value={value}
+        onChange={onChange}
+      >
         {options.map((option) => (
-          <option key={option} value={option}>{option}</option>
+          <option key={option} value={option}>
+            {option}
+          </option>
         ))}
       </select>
     </label>
   );
 }
+```
